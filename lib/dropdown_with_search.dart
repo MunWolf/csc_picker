@@ -6,6 +6,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
   final T selected;
   final List items;
   final EdgeInsets? selectedItemPadding;
+  final TextAlign? selectedItemTextAlign;
   final TextStyle? selectedItemStyle;
   final TextStyle? dropdownHeadingStyle;
   final TextStyle? itemStyle;
@@ -27,6 +28,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
       required this.onChanged,
       this.selectedItemPadding,
       this.selectedItemStyle,
+      this.selectedItemTextAlign,
       this.dropdownHeadingStyle,
       this.itemStyle,
       this.decoration,
@@ -85,6 +87,7 @@ class DropdownWithSearch<T> extends StatelessWidget {
             children: [
               Expanded(
                   child: Text(selected.toString(),
+                      textAlign: selectedItemTextAlign ?? TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       style: selectedItemStyle != null
                           ? selectedItemStyle
