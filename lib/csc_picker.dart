@@ -713,17 +713,10 @@ class CSCPickerState extends State<CSCPicker> {
   Future<List<String?>> getCities() async {
     _cities.clear();
     var response = await loadCountryJson();
-    var takeCity = widget.flagState == CountryFlag.ENABLE ||
-            widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY
-        ? response
+    var takeCity = response
             .map((map) => Country.fromJson(map))
             .where(
                 (item) => item == _selectedCountry)
-            .map((item) => item.state)
-            .toList()
-        : response
-            .map((map) => Country.fromJson(map))
-            .where((item) => item == _selectedCountry)
             .map((item) => item.state)
             .toList();
     var cities = takeCity as List;
