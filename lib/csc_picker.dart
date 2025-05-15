@@ -674,10 +674,7 @@ class CSCPickerState extends State<CSCPicker> {
 
   ///Add a country to country list
   void addCountryToList(data) {
-    var model = Country();
-    model.name = data['name'];
-    model.iso2 = data["iso2"];
-    model.emoji = data['emoji'];
+    var model = Country.fromJson(data);
     if (!mounted) return;
     setState(() {
       _country.add(model);
@@ -689,17 +686,12 @@ class CSCPickerState extends State<CSCPicker> {
     _states.clear();
     //print(_selectedCountry);
     var response = await loadCountryJson();
-    var takeState = widget.flagState == CountryFlag.ENABLE ||
-            widget.flagState == CountryFlag.SHOW_IN_DROP_DOWN_ONLY
-        ? response
+    var takeState = response
             .map((map) => Country.fromJson(map))
-            .where(
-                (item) => item == _selectedCountry)
-            .map((item) => item.state)
-            .toList()
-        : response
-            .map((map) => Country.fromJson(map))
-            .where((item) => item == _selectedCountry)
+            .where((item) {
+              return item == _selectedCountry;
+            })
+                //(item) => item == _selectedCountry)
             .map((item) => item.state)
             .toList();
     var states = takeState as List;

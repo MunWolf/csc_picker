@@ -1,4 +1,6 @@
-class Country {
+import 'package:equatable/equatable.dart';
+
+class Country extends Equatable {
   int? id;
   String? name;
   String? emoji;
@@ -52,6 +54,9 @@ class Country {
     }
     return data;
   }
+
+  @override
+  List<Object?> get props => [name];
 }
 
 class Region {
